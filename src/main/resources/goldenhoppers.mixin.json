@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.github.jawbotau.goldenhoppers.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"mixins": [
+      "HopperBlockEntityMixin",
+      "MinecartDispenserBehaviorMixin",
+      "MinecartItemMixin",
+      "RedstoneWireBlockMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

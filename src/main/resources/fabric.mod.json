@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "goldenhoppers",
+	"version": "${version}",
+	"name": "Golden Hoppers",
+	"description": "Adds a filterable hopper to Minecraft.",
+	"authors": [
+		"haykam821",
+		"jawbotau"
+	],
+	"contact": {
+		"homepage": "https://github.com/haykam821/Golden-Hoppers#readme",
+		"issues": "https://github.com/haykam821/Golden-Hoppers/issues"
+	},
+	"entrypoints": {
+		"main": [
+			"com.github.jawbotau.goldenhoppers.Main"
+		],
+		"client": [
+			"com.github.jawbotau.goldenhoppers.ClientMain"
+		],
+		"fabric-datagen": [
+			"com.github.jawbotau.goldenhoppers.data.GoldenHoppersDatagen"
+		]
+	},
+	"mixins": [
+		"goldenhoppers.mixin.json"
+	],
+	"license": "MIT",
+	"icon": "assets/goldenhoppers/textures/item/golden_hopper.png",
+	"depends": {
+		"fabricloader": ">=0.4.0",
+		"fabric": ">=0.51.0"
+	}
+}

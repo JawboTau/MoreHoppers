@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/hopper_side",
+  "textures": {
+    "inside": "minecraft:block/netherite_block",
+    "particle": "minecraft:block/netherite_block",
+    "side": "minecraft:block/netherite_block",
+    "top": "minecraft:block/netherite_block"
+  }
+}

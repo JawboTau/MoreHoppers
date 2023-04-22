@@ -1,0 +1,22 @@
+package com.github.jawbotau.goldenhoppers;
+
+import com.github.jawbotau.goldenhoppers.screen.FilteredHopperScreen;
+import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
+import net.minecraft.client.render.entity.MinecartEntityRenderer;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.MinecartEntityModel;
+
+public class ClientMain implements ClientModInitializer {
+	@Override
+	public void onInitializeClient() {
+		HandledScreens.register(Main.FILTER_HOPPER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, FilteredHopperScreen::new);
+
+		EntityModelLayer modelLayer = new EntityModelLayer(Main.GOLD_HOPPER_MINECART_ID, "main");
+		EntityModelLayerRegistry.registerModelLayer(modelLayer, MinecartEntityModel::getTexturedModelData);
+
+		EntityRendererRegistry.register(Main.GOLD_HOPPER_MINECART_ENTITY_TYPE, context -> new MinecartEntityRenderer<>(context, modelLayer));
+	}
+}

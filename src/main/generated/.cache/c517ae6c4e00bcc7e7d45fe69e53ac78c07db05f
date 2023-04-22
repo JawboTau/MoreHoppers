@@ -1,0 +1,10 @@
+// 1.19.4	2023-04-22T13:54:10.0088294	Golden Hoppers/Model Definitions
+d8addd7535444cdac0ab3f49c676409a248da036 assets\goldenhoppers\blockstates\golden_hopper.json
+5ab5dd1b61f7e9ce58dba2c38b401469660cd70f assets\goldenhoppers\blockstates\ancient_hopper.json
+2b293ce62a19bfaaac9007bb9103e860dae8ed52 assets\goldenhoppers\models\item\golden_hopper.json
+478355a9f11c528539e321a439e7569ebb8274e4 assets\goldenhoppers\models\block\golden_hopper_side.json
+bbfa91ddb57e2fecdb1ceba6ca3374362015f3cc assets\goldenhoppers\models\block\ancient_hopper.json
+3d7d7f08e7b658d266fca5d20b01a2b3a3683ed1 assets\goldenhoppers\models\item\golden_hopper_minecart.json
+839afeb3864d2d8c82c605bd85a9d9a8c2fdb39b assets\goldenhoppers\models\block\golden_hopper.json
+ea90f6ac9c50485d465a1049e12ab5769a6f2886 assets\goldenhoppers\models\item\ancient_hopper.json
+a1f90379f90d6fb72bde52820261ded117cf4be6 assets\goldenhoppers\models\block\ancient_hopper_side.json
