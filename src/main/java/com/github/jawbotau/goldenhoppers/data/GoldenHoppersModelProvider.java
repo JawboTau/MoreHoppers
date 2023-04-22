@@ -22,8 +22,8 @@ public class GoldenHoppersModelProvider extends FabricModelProvider {
 
 	@Override
 	public void generateBlockStateModels(BlockStateModelGenerator modelGenerator) {
-		GoldenHoppersModelProvider.registerHopper(Main.GOLD_HOPPER_BLOCK, Blocks.GOLD_BLOCK, modelGenerator);
-		GoldenHoppersModelProvider.registerHopper(Main.ANCIENT_HOPPER_BLOCK, Blocks.NETHERITE_BLOCK, modelGenerator);
+		GoldenHoppersModelProvider.registerHopper(Main.GOLD_HOPPER_BLOCK, modelGenerator, Blocks.GOLD_BLOCK);
+		GoldenHoppersModelProvider.registerHopper(Main.ANCIENT_HOPPER_BLOCK, modelGenerator, createHopperTextures(new Identifier(Main.MOD_ID, "block/ancient_block")));
 	}
 
 	@Override
@@ -32,11 +32,12 @@ public class GoldenHoppersModelProvider extends FabricModelProvider {
 		modelGenerator.register(Main.GOLD_HOPPER_MINECART, Models.GENERATED);
 	}
 
-	public static void registerHopper(Block hopper, Block base, BlockStateModelGenerator modelGenerator) {
-		TextureMap textures = GoldenHoppersModelProvider.createHopperTextures(base);
-
-		Identifier modelId = HOPPER_MODEL.upload(hopper, textures, modelGenerator.modelCollector);
-		Identifier sideModelId = HOPPER_SIDE_MODEL.upload(hopper, textures, modelGenerator.modelCollector);
+	public static void registerHopper(Block hopper, BlockStateModelGenerator modelGenerator, Block base) {
+		registerHopper(hopper, modelGenerator, createHopperTextures(base));
+	}
+	public static void registerHopper(Block hopper, BlockStateModelGenerator modelGenerator, TextureMap map) {
+		Identifier modelId = HOPPER_MODEL.upload(hopper, map, modelGenerator.modelCollector);
+		Identifier sideModelId = HOPPER_SIDE_MODEL.upload(hopper, map, modelGenerator.modelCollector);
 
 		BlockStateVariantMap variants = BlockStateVariantMap.create(HopperBlock.FACING)
 			.register(Direction.DOWN, BlockStateVariant.create().put(VariantSettings.MODEL, modelId))
@@ -49,8 +50,9 @@ public class GoldenHoppersModelProvider extends FabricModelProvider {
 	}
 
 	public static TextureMap createHopperTextures(Block block) {
-		Identifier id = TextureMap.getId(block);
-
+		return createHopperTextures(TextureMap.getId(block));
+	}
+	public static TextureMap createHopperTextures(Identifier id) {
 		return new TextureMap()
 			.put(TextureKey.PARTICLE, id)
 			.put(TextureKey.TOP, id)

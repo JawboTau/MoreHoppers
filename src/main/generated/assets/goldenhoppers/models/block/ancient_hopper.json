@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/hopper",
   "textures": {
-    "inside": "minecraft:block/netherite_block",
-    "particle": "minecraft:block/netherite_block",
-    "side": "minecraft:block/netherite_block",
-    "top": "minecraft:block/netherite_block"
+    "inside": "goldenhoppers:block/ancient_block",
+    "particle": "goldenhoppers:block/ancient_block",
+    "side": "goldenhoppers:block/ancient_block",
+    "top": "goldenhoppers:block/ancient_block"
   }
 }
