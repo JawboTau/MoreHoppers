@@ -17,8 +17,9 @@ public class GoldenHopperScreenHandler extends FilteredHopperScreenHandler {
 
 		this.inventory = inventory;
 		ScreenHandler.checkSize(this.inventory, 5);
-		for (int slot = 0; slot < 5; slot++) {
-			this.addSlot(new Slot(this.inventory, slot, slot * 18 + 62, 20));
+		for (int slot = 0; slot < inventory.size(); slot++) {
+			System.out.println("inv " + slot);
+			this.addSlot(new Slot(this.inventory, slot+41, slot * 18 + 62, 20));
 		}
 		this.inventory.onOpen(playerInventory.player);
 	}

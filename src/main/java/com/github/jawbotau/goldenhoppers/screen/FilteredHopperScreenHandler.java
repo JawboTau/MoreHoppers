@@ -16,18 +16,11 @@ public abstract class FilteredHopperScreenHandler extends ScreenHandler {
 	public FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory filterInventory) {
 		super(Main.GOLD_SCREEN_HANDLER_TYPE, syncId);
 
-		// Filter
-		this.filterInventory = filterInventory;
-		ScreenHandler.checkSize(this.filterInventory, 5);
-		for(int i = 0; i < filterSlots.length; i++) {
-			this.filterSlots[i] = this.addSlot(new Slot(this.filterInventory, i, i*18+62, 40) {
-				@Override
-				public int getMaxItemCount() {
-					return 1;
-				}
-			});
+
+		// Hotbar
+		for (int column = 0; column < 9; column++) {
+			this.addSlot(new Slot(playerInventory, column, column * 18 + 8, 109));
 		}
-		this.filterInventory.onOpen(playerInventory.player);
 
 		// Player inventory
 		for (int row = 0; row < 3; row++) {
@@ -36,10 +29,19 @@ public abstract class FilteredHopperScreenHandler extends ScreenHandler {
 			}
 		}
 
-		// Hotbar
-		for (int column = 0; column < 9; column++) {
-			this.addSlot(new Slot(playerInventory, column, column * 18 + 8, 109));
+		// Filter
+		this.filterInventory = filterInventory;
+		ScreenHandler.checkSize(this.filterInventory, 5);
+		for(int i = 0; i < filterSlots.length; i++) {
+			System.out.println("filter" + i);
+			this.filterSlots[i] = this.addSlot(new Slot(this.filterInventory, i + 36, i*18+62, 40) {
+				@Override
+				public int getMaxItemCount() {
+					return 1;
+				}
+			});
 		}
+		this.filterInventory.onOpen(playerInventory.player);
 	}
 
 	protected FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory) {
