@@ -1,5 +1,6 @@
 package com.github.jawbotau.goldenhoppers.screen;
 
+import com.github.jawbotau.goldenhoppers.Main;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -13,7 +14,7 @@ public class GoldenHopperScreenHandler extends FilteredHopperScreenHandler {
 
 
 	public GoldenHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, Inventory filterInventory) {
-		super(syncId, playerInventory, filterInventory);
+		super(syncId, playerInventory, filterInventory, Main.GOLD_SCREEN_HANDLER_TYPE);
 
 		this.inventory = inventory;
 		ScreenHandler.checkSize(this.inventory, 5);
@@ -24,7 +25,7 @@ public class GoldenHopperScreenHandler extends FilteredHopperScreenHandler {
 		this.inventory.onOpen(playerInventory.player);
 	}
 	public GoldenHopperScreenHandler(int syncId, PlayerInventory playerInventory) {
-		super(syncId, playerInventory);
+		super(syncId, playerInventory, Main.GOLD_SCREEN_HANDLER_TYPE);
 		this.inventory = new SimpleInventory(5);
 	}
 

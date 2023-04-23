@@ -2,7 +2,8 @@ package com.github.jawbotau.goldenhoppers;
 
 import com.github.jawbotau.goldenhoppers.block.AncientHopperBlock;
 import com.github.jawbotau.goldenhoppers.block.GoldenHopperBlock;
-import com.github.jawbotau.goldenhoppers.block.entity.GoldenHopperBlockEntity;
+import com.github.jawbotau.goldenhoppers.block.entity.AncientHopperBlockEntity;
+import com.github.jawbotau.goldenhoppers.block.entity.GoldHopperBlockEntity;
 import com.github.jawbotau.goldenhoppers.entity.AncientHopperMinecartEntity;
 import com.github.jawbotau.goldenhoppers.entity.FilteredHopperMinecartEntity;
 import com.github.jawbotau.goldenhoppers.entity.GoldHopperMinecartEntity;
@@ -41,7 +42,8 @@ public class Main implements ModInitializer {
 	public static final Block GOLD_HOPPER_BLOCK, ANCIENT_HOPPER_BLOCK;
 	public static final Item GOLD_HOPPER, ANCIENT_HOPPER;
 	public static final Item GOLD_HOPPER_MINECART, ANCIENT_HOPPER_MINECART;
-	public static final BlockEntityType<GoldenHopperBlockEntity> FILTER_HOPPER_BLOCK_ENTITY_TYPE;
+	public static final BlockEntityType<GoldHopperBlockEntity> GOLD_HOPPER_BLOCK_ENTITY_TYPE;
+	public static final BlockEntityType<AncientHopperBlockEntity> ANCIENT_HOPPER_BLOCK_ENTITY_TYPE;
 	public static final ScreenHandlerType<FilteredHopperScreenHandler> GOLD_SCREEN_HANDLER_TYPE, ANCIENT_SCREEN_HANDLER_TYPE;
 	public static final EntityType<FilteredHopperMinecartEntity> GOLD_HOPPER_MINECART_ENTITY_TYPE, ANCIENT_HOPPER_MINECART_ENTITY_TYPE;
 
@@ -52,7 +54,9 @@ public class Main implements ModInitializer {
 		GOLD_HOPPER = new BlockItem(GOLD_HOPPER_BLOCK, new FabricItemSettings());
 		ANCIENT_HOPPER = new BlockItem(ANCIENT_HOPPER_BLOCK, new FabricItemSettings());
 
-		FILTER_HOPPER_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(GoldenHopperBlockEntity::new, GOLD_HOPPER_BLOCK, ANCIENT_HOPPER_BLOCK).build();
+		GOLD_HOPPER_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(GoldHopperBlockEntity::new, GOLD_HOPPER_BLOCK).build();
+		ANCIENT_HOPPER_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(AncientHopperBlockEntity::new, ANCIENT_HOPPER_BLOCK).build();
+
 
 		GOLD_SCREEN_HANDLER_TYPE = new ScreenHandlerType<>(GoldenHopperScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 		ANCIENT_SCREEN_HANDLER_TYPE = new ScreenHandlerType<>(AncientHopperScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
@@ -81,8 +85,11 @@ public class Main implements ModInitializer {
 		regItem(GOLD_HOPPER_ID, GOLD_HOPPER);
 		regItem(ANCIENT_HOPPER_ID, ANCIENT_HOPPER);
 
-		regBlockEntity(FILTER_HOPPER_ID, FILTER_HOPPER_BLOCK_ENTITY_TYPE);
-		regScreenHandler(FILTER_HOPPER_ID, GOLD_SCREEN_HANDLER_TYPE);
+		regBlockEntity(GOLD_HOPPER_ID, GOLD_HOPPER_BLOCK_ENTITY_TYPE);
+		regBlockEntity(ANCIENT_HOPPER_ID, ANCIENT_HOPPER_BLOCK_ENTITY_TYPE);
+
+		regScreenHandler(GOLD_HOPPER_ID, GOLD_SCREEN_HANDLER_TYPE);
+		regScreenHandler(ANCIENT_HOPPER_ID, ANCIENT_SCREEN_HANDLER_TYPE);
 
 		regEntity(GOLD_HOPPER_MINECART_ID, GOLD_HOPPER_MINECART_ENTITY_TYPE);
 		regEntity(ANCIENT_HOPPER_MINECART_ID, ANCIENT_HOPPER_MINECART_ENTITY_TYPE);

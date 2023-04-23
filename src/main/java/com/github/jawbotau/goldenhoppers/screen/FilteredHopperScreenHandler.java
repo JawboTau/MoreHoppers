@@ -1,21 +1,20 @@
 package com.github.jawbotau.goldenhoppers.screen;
 
-import com.github.jawbotau.goldenhoppers.Main;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 
 public abstract class FilteredHopperScreenHandler extends ScreenHandler {
 	protected final Inventory filterInventory;
 	protected final Slot[] filterSlots = new Slot[5];
 
-	public FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory filterInventory) {
-		super(Main.GOLD_SCREEN_HANDLER_TYPE, syncId);
-
+	public FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory filterInventory, ScreenHandlerType type) {
+		super(type, syncId);
 
 		// Hotbar
 		for (int column = 0; column < 9; column++) {
@@ -44,8 +43,8 @@ public abstract class FilteredHopperScreenHandler extends ScreenHandler {
 		this.filterInventory.onOpen(playerInventory.player);
 	}
 
-	protected FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new SimpleInventory(5));
+	protected FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerType type) {
+		this(syncId, playerInventory, new SimpleInventory(5), type);
 	}
 
 	protected Slot[] getFilterSlots() {
