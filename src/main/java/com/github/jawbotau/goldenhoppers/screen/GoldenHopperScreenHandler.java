@@ -19,7 +19,7 @@ public class GoldenHopperScreenHandler extends FilteredHopperScreenHandler {
 		ScreenHandler.checkSize(this.inventory, 5);
 		for (int slot = 0; slot < inventory.size(); slot++) {
 			System.out.println("inv " + slot);
-			this.addSlot(new Slot(this.inventory, slot+41, slot * 18 + 62, 20));
+			this.addSlot(new Slot(this.inventory, slot, slot * 18 + 62, 20));
 		}
 		this.inventory.onOpen(playerInventory.player);
 	}
@@ -30,7 +30,8 @@ public class GoldenHopperScreenHandler extends FilteredHopperScreenHandler {
 
 	@Override
 	protected ItemStack quickMove(int index, ItemStack slotStack, ItemStack copy, Slot slot) {
-		if (index > this.inventory.size()) return copy;
+		System.out.println("is " + index + " > "  + this.inventory.size() + "?");
+		if (index >= this.inventory.size()) return copy;
 		System.out.println(index + " is not > than " + this.inventory.size());
 		System.out.println("Filter is " + this.filterInventory.size());
 
