@@ -1,7 +1,7 @@
 package com.github.jawbotau.goldenhoppers.block.entity;
 
 import com.github.jawbotau.goldenhoppers.Main;
-import com.github.jawbotau.goldenhoppers.screen.FilteredHopperScreenHandler;
+import com.github.jawbotau.goldenhoppers.screen.GoldenHopperScreenHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HopperBlockEntity;
@@ -19,18 +19,18 @@ import net.minecraft.util.math.Direction;
 
 import java.util.stream.IntStream;
 
-public class FilteredHopperBlockEntity extends HopperBlockEntity implements FilteredHopper, SidedInventory {
+public class GoldenHopperBlockEntity extends HopperBlockEntity implements FilteredHopper, SidedInventory {
 	private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
 
-	private final Inventory filterInventory = new SimpleInventory(1);
+	private final Inventory filterInventory = new SimpleInventory(5);
 
-	public FilteredHopperBlockEntity(BlockPos pos, BlockState state) {
+	public GoldenHopperBlockEntity(BlockPos pos, BlockState state) {
 		super(pos, state);
 	}
 
 	@Override
-	public ItemStack getFilter() {
-		return filterInventory.getStack(0);
+	public Inventory getFilters() {
+		return filterInventory;
 	}
 
 	public void scatterFilter() {
@@ -76,6 +76,6 @@ public class FilteredHopperBlockEntity extends HopperBlockEntity implements Filt
 
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new FilteredHopperScreenHandler(syncId, playerInventory, this, filterInventory);
+		return new GoldenHopperScreenHandler(syncId, playerInventory, this, filterInventory);
 	}
 }

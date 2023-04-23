@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class RedstoneWireBlockMixin {
 	@Inject(method = "canRunOnTop", at = @At("HEAD"), cancellable = true)
 	private void allowWireOnGoldenHoppers(BlockView world, BlockPos pos, BlockState floor, CallbackInfoReturnable<Boolean> ci) {
-		if (floor instanceof CustomHopper) {
+		if (floor.getBlock() instanceof CustomHopper) {
 			ci.setReturnValue(true);
 		}
 	}

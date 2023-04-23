@@ -39,9 +39,10 @@ public class FilteredHopperScreen extends HandledScreen<FilteredHopperScreenHand
 		drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
 		// Render the filter slot placeholder
-		Slot filterSlot = this.handler.getFilterSlot();
-		if (!filterSlot.hasStack()) {
-			this.drawFilterIcon(matrices, filterSlot);
+		Slot[] filterSlots = this.handler.getFilterSlots();
+		for (Slot filterSlot : filterSlots) {
+			if (!filterSlot.hasStack())
+				this.drawFilterIcon(matrices, filterSlot);
 		}
 	}
 

@@ -8,15 +8,24 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.entity.MinecartEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.MinecartEntityModel;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.util.Identifier;
 
 public class ClientMain implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		HandledScreens.register(Main.FILTER_HOPPER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, FilteredHopperScreen::new);
+		HandledScreens.register(Main.GOLD_SCREEN_HANDLER_TYPE, FilteredHopperScreen::new);
+		HandledScreens.register(Main.ANCIENT_SCREEN_HANDLER_TYPE, FilteredHopperScreen::new);
 
-		EntityModelLayer modelLayer = new EntityModelLayer(Main.GOLD_HOPPER_MINECART_ID, "main");
+		registerMinecart(Main.GOLD_HOPPER_MINECART_ID, Main.GOLD_HOPPER_MINECART_ENTITY_TYPE);
+		registerMinecart(Main.ANCIENT_HOPPER_MINECART_ID, Main.ANCIENT_HOPPER_MINECART_ENTITY_TYPE);
+	}
+
+	private static <T extends AbstractMinecartEntity> void registerMinecart(Identifier id, EntityType<T> type){
+		EntityModelLayer modelLayer = new EntityModelLayer(id, "main");
 		EntityModelLayerRegistry.registerModelLayer(modelLayer, MinecartEntityModel::getTexturedModelData);
+		EntityRendererRegistry.register(type, context -> new MinecartEntityRenderer<>(context, modelLayer));
 
-		EntityRendererRegistry.register(Main.GOLD_HOPPER_MINECART_ENTITY_TYPE, context -> new MinecartEntityRenderer<>(context, modelLayer));
 	}
 }

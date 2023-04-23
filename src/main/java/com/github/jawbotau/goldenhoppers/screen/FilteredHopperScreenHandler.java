@@ -9,35 +9,27 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class FilteredHopperScreenHandler extends ScreenHandler {
-	private final Inventory inventory;
-	private final Inventory filterInventory;
-	private final Slot filterSlot;
+public abstract class FilteredHopperScreenHandler extends ScreenHandler {
+	protected final Inventory filterInventory;
+	protected final Slot[] filterSlots = new Slot[5];
 
-	public FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, Inventory filterInventory) {
-		super(Main.FILTER_HOPPER_SCREEN_HANDLER_SCREEN_HANDLER_TYPE, syncId);
-
-		// Inventory
-		this.inventory = inventory;
-		ScreenHandler.checkSize(this.inventory, 5);
-		for (int slot = 0; slot < 5; slot++) {
-			this.addSlot(new Slot(this.inventory, slot, slot * 18 + 62, 20));
-		}
-		this.inventory.onOpen(playerInventory.player);
+	public FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory filterInventory) {
+		super(Main.GOLD_SCREEN_HANDLER_TYPE, syncId);
 
 		// Filter
 		this.filterInventory = filterInventory;
-		ScreenHandler.checkSize(this.filterInventory, 1);
-		this.filterSlot = this.addSlot(new Slot(this.filterInventory, 0, 26, 20) {
-			@Override
-			public int getMaxItemCount() {
-				return 1;
-			}
-		});
+		ScreenHandler.checkSize(this.filterInventory, 5);
+		for(int i = 0; i < filterSlots.length; i++) {
+			this.filterSlots[i] = this.addSlot(new Slot(this.filterInventory, i, i*18+62, 40) {
+				@Override
+				public int getMaxItemCount() {
+					return 1;
+				}
+			});
+		}
 		this.filterInventory.onOpen(playerInventory.player);
 
 		// Player inventory
-
 		for (int row = 0; row < 3; row++) {
 			for (int column = 0; column < 9; column++) {
 				this.addSlot(new Slot(playerInventory, column + row * 9 + 9, column * 18 + 8, row * 18 + 51));
@@ -50,49 +42,48 @@ public class FilteredHopperScreenHandler extends ScreenHandler {
 		}
 	}
 
-	public FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new SimpleInventory(5), new SimpleInventory(1));
+	protected FilteredHopperScreenHandler(int syncId, PlayerInventory playerInventory) {
+		this(syncId, playerInventory, new SimpleInventory(5));
 	}
 
-	protected Slot getFilterSlot() {
-		return this.filterSlot;
+	protected Slot[] getFilterSlots() {
+		return this.filterSlots;
 	}
 
 	@Override
 	public boolean canUse(PlayerEntity player) {
-		return this.inventory.canPlayerUse(player);
+		return this.filterInventory.canPlayerUse(player);
 	}
 
 	@Override
 	public ItemStack quickMove(PlayerEntity player, int index) {
+		System.out.println(index);
 		Slot slot = slots.get(index);
+		System.out.println("got slot");
 		if (!slot.hasStack()) return ItemStack.EMPTY;
 
+		System.out.println("got stack");
+
 		ItemStack slotStack = slot.getStack();
-		ItemStack stack = slotStack.copy();
+		System.out.println("doing the big one");
 
-		if (index < this.inventory.size()) {
-			if (!this.insertItem(slotStack, this.inventory.size() + 1, this.slots.size(), true)) {
-				return ItemStack.EMPTY;
-			}
-		} else if (!this.insertItem(slotStack, 0, this.inventory.size(), false)) {
-			return ItemStack.EMPTY;
-		}
+		ItemStack copy = quickMove(index, slotStack, slotStack.copy(), slot);
 
-		if (slotStack.isEmpty()) {
+		System.out.println("quick moving");
+
+		if (slotStack.isEmpty())
 			slot.setStack(ItemStack.EMPTY);
-		} else {
+		else
 			slot.markDirty();
-		}
 
-		return stack;
+		return copy;
 	}
+
+	protected abstract ItemStack quickMove(int index, ItemStack slotStack, ItemStack stack, Slot slot);
 
 	@Override
 	public void onClosed(PlayerEntity player) {
 		super.onClosed(player);
-
-		this.inventory.onClose(player);
 		this.filterInventory.onClose(player);
 	}
 
