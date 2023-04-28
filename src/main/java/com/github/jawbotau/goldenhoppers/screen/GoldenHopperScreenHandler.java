@@ -12,6 +12,7 @@ import net.minecraft.screen.slot.Slot;
 public class GoldenHopperScreenHandler extends FilteredHopperScreenHandler {
 	protected final Inventory inventory;
 
+
 	public GoldenHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, Inventory filterInventory) {
 		super(syncId, playerInventory, filterInventory, Main.GOLD_SCREEN_HANDLER_TYPE);
 
@@ -55,6 +56,4 @@ public class GoldenHopperScreenHandler extends FilteredHopperScreenHandler {
 		super.onClosed(player);
 		this.inventory.onClose(player);
 	}
-
-
 }

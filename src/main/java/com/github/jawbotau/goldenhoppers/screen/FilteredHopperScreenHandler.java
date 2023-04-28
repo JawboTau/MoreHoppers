@@ -18,7 +18,7 @@ public abstract class FilteredHopperScreenHandler extends ScreenHandler {
 		// Player inventory including Hotbar excluding Offhand
 		for (int column = 0; column < 9; column++)
 			for (int row = 0; row < 4; row++)
-				addSlot(new Slot(playerInventory, column + row * 9 + 18,
+				addSlot(new Slot(playerInventory, column + row * 9,
 						column * 18 + 26, row * 18 + ((row == 3) ? 52 : 55)));
 
 		// Filter
