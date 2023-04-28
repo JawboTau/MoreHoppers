@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
 public class AncientHopperBlockEntity extends FilteredHopperBlockEntity{
 	public AncientHopperBlockEntity(BlockPos pos, BlockState state) {
@@ -27,5 +28,10 @@ public class AncientHopperBlockEntity extends FilteredHopperBlockEntity{
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
 		return new AncientHopperScreenHandler(syncId, playerInventory, filterInventory);
+	}
+
+	@Override
+	public int[] getAvailableSlots(Direction side) {
+		return new int[0];
 	}
 }

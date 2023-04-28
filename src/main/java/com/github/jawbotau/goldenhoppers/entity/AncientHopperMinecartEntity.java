@@ -6,7 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.world.World;
 
@@ -28,10 +27,5 @@ public class AncientHopperMinecartEntity extends FilteredHopperMinecartEntity{
 	@Override
 	protected Item getItem() {
 		return Main.ANCIENT_HOPPER_MINECART;
-	}
-
-	@Override
-	public boolean isAcceptedByFilter(ItemStack stack) {
-		return super.isAcceptedByFilter(stack);
 	}
 }

@@ -12,11 +12,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-import java.util.stream.IntStream;
-
 public abstract class FilteredHopperBlockEntity extends HopperBlockEntity implements FilteredHopper, SidedInventory {
-	protected static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
-
 	protected final Inventory filterInventory = new SimpleInventory(5);
 
 	public FilteredHopperBlockEntity(BlockPos pos, BlockState state) {
@@ -30,11 +26,6 @@ public abstract class FilteredHopperBlockEntity extends HopperBlockEntity implem
 
 	public void scatterFilter() {
 		ItemScatterer.spawn(getWorld(), getPos(), filterInventory);
-	}
-
-	@Override
-	public int[] getAvailableSlots(Direction side) {
-		return AVAILABLE_SLOTS;
 	}
 
 	@Override
@@ -60,5 +51,4 @@ public abstract class FilteredHopperBlockEntity extends HopperBlockEntity implem
 	}
 	@Override
 	public abstract BlockEntityType<?> getType();
-
 }

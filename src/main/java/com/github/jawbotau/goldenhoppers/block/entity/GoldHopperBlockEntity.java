@@ -8,8 +8,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 
-public class GoldHopperBlockEntity extends FilteredHopperBlockEntity{
+import java.util.stream.IntStream;
+
+public class GoldHopperBlockEntity extends FilteredHopperBlockEntity {
 	public GoldHopperBlockEntity(BlockPos pos, BlockState state) {
 		super(pos, state);
 	}
@@ -27,5 +30,10 @@ public class GoldHopperBlockEntity extends FilteredHopperBlockEntity{
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
 		return new GoldenHopperScreenHandler(syncId, playerInventory, this, filterInventory);
+	}
+
+	@Override
+	public int[] getAvailableSlots(Direction side) {
+		return IntStream.range(41,46).toArray();
 	}
 }
